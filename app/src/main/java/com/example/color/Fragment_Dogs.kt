@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment__cats.*
 import kotlinx.android.synthetic.main.fragment__dogs.*
+import kotlin.math.truncate
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,12 +41,35 @@ class Fragment_Dogs : Fragment() {
         listPets.add(Pets(R.drawable.dog7,"dog 7"))
         listPets.add(Pets(R.drawable.dog8,"dog 8"))
         listPets.add(Pets(R.drawable.dog9,"dog 9"))
+        listPets.add(Pets(R.drawable.dog1,"dog 1"))
+        listPets.add(Pets(R.drawable.dog2,"dog 2"))
+        listPets.add(Pets(R.drawable.dog3,"dog 3"))
+        listPets.add(Pets(R.drawable.dog4,"dog 4"))
+        listPets.add(Pets(R.drawable.dog5,"dog 5"))
+        listPets.add(Pets(R.drawable.dog6,"dog 6"))
+        listPets.add(Pets(R.drawable.dog7,"dog 7"))
+        listPets.add(Pets(R.drawable.dog8,"dog 8"))
+        listPets.add(Pets(R.drawable.dog9,"dog 9"))
 
         var gridLayoutManager: GridLayoutManager = GridLayoutManager(activity,2)
         recycleViewDogs.layoutManager = gridLayoutManager
 
         adapter = PetsAdapter(listPets)
         recycleViewDogs.adapter = adapter
+        recycleViewDogs.setHasFixedSize(true)
+
+        searchViewDog.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+
+        })
         super.onViewCreated(view, savedInstanceState)
     }
 

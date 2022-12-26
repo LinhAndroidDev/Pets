@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment__cats.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,12 +39,34 @@ class Fragment_Cats : Fragment() {
         listPets.add(Pets(R.drawable.cat7,"cat 7"))
         listPets.add(Pets(R.drawable.cat8,"cat 8"))
         listPets.add(Pets(R.drawable.cat9,"cat 9"))
+        listPets.add(Pets(R.drawable.cat1,"cat 1"))
+        listPets.add(Pets(R.drawable.cat2,"cat 2"))
+        listPets.add(Pets(R.drawable.cat3,"cat 3"))
+        listPets.add(Pets(R.drawable.cat4,"cat 4"))
+        listPets.add(Pets(R.drawable.cat5,"cat 5"))
+        listPets.add(Pets(R.drawable.cat6,"cat 6"))
+        listPets.add(Pets(R.drawable.cat7,"cat 7"))
+        listPets.add(Pets(R.drawable.cat8,"cat 8"))
+        listPets.add(Pets(R.drawable.cat9,"cat 9"))
 
         var gridLayoutManager: GridLayoutManager = GridLayoutManager(activity,2)
         recycleViewCats.layoutManager = gridLayoutManager
 
         adapter = PetsAdapter(listPets)
         recycleViewCats.adapter = adapter
+
+        searchViewCat.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
         super.onViewCreated(view, savedInstanceState)
     }
 

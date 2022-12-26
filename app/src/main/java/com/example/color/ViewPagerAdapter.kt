@@ -10,6 +10,7 @@ enum class Page(val title: String, val fragmentClass : Class<out Fragment>) {
     BIRD("Birds", Fragment_Birds::class.java);
 }
 
+@Suppress("DEPRECATION")
 class ViewPagerAdapter(fm: FragmentManager, behavior: Int) :
     FragmentStatePagerAdapter(fm, behavior) {
 

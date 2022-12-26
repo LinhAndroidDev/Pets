@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.GridLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment__birds.*
 import kotlinx.android.synthetic.main.fragment__birds.*
 
@@ -38,12 +40,34 @@ class Fragment_Birds : Fragment() {
         listPets.add(Pets(R.drawable.bird7,"bird 7"))
         listPets.add(Pets(R.drawable.bird8,"bird 8"))
         listPets.add(Pets(R.drawable.bird9,"bird 9"))
+        listPets.add(Pets(R.drawable.bird1,"bird 1"))
+        listPets.add(Pets(R.drawable.bird2,"bird 2"))
+        listPets.add(Pets(R.drawable.bird3,"bird 3"))
+        listPets.add(Pets(R.drawable.bird4,"bird 4"))
+        listPets.add(Pets(R.drawable.bird5,"bird 5"))
+        listPets.add(Pets(R.drawable.bird6,"bird 6"))
+        listPets.add(Pets(R.drawable.bird7,"bird 7"))
+        listPets.add(Pets(R.drawable.bird8,"bird 8"))
+        listPets.add(Pets(R.drawable.bird9,"bird 9"))
 
         var gridLayoutManager: GridLayoutManager = GridLayoutManager(activity,2)
         recycleViewBirds.layoutManager = gridLayoutManager
 
         adapter = PetsAdapter(listPets)
         recycleViewBirds.adapter = adapter
+
+        searchViewBird.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                adapter.filter.filter(query)
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return false
+            }
+        })
+
         super.onViewCreated(view, savedInstanceState)
     }
     
